@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Literata", "Noto Serif KR", serif;
+  --font-sans: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  
+  --color-surface: #fbfaf1;
+  --color-surface-dim: #dbdad2;
+  --color-surface-bright: #fbfaf1;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f5f4eb;
+  --color-surface-container: #efeee5;
+  --color-surface-container-high: #e9e8e0;
+  --color-surface-container-highest: #e4e3da;
+  --color-on-surface: #1b1c17;
+  --color-on-surface-variant: #434843;
+  --color-outline: #737872;
+  --color-outline-variant: #c3c8c1;
+  --color-primary: #4c6150;
+  --color-primary-fixed: #d1e9d3;
+  --color-on-primary: #ffffff;
+  --color-on-primary-fixed: #0c1f13;
+  --color-secondary: #7e5713;
+  --color-secondary-container: #fec97b;
+  --color-on-secondary-container: #78520e;
+  --color-secondary-fixed: #ffddb1;
+  --color-on-secondary-fixed: #291800;
+  --color-tertiary: #4e6052;
+  --color-tertiary-fixed: #d3e8d5;
+  --color-on-tertiary-fixed: #0e1f14;
+}
+
+@layer base {
+  html, body {
+    background-color: #fbfaf1;
+    color: #1b1c17;
+    font-family: var(--font-sans);
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Custom scrollbar hiding */
+::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes fadeFloat {
+  0% {
+    opacity: 0.9;
+    transform: translateY(0px) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-38px) scale(1.3);
+  }
+}

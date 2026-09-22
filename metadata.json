@@ -1,0 +1,6 @@
+{
+  "name": "달의 오두막",
+  "description": "동화 같은 오두막에서 아기 솜용 구름꼬리와 함께하는 따뜻하고 포근한 교감 힐링 펫 케어 앱",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
