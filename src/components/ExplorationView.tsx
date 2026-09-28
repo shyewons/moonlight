@@ -6,12 +6,14 @@ interface ExplorationViewProps {
   inventory: InventoryItem[];
   setInventory: React.Dispatch<React.SetStateAction<InventoryItem[]>>;
   onGoHome: () => void;
+  onOpenSettings?: () => void;
 }
 
 export const ExplorationView: React.FC<ExplorationViewProps> = ({
   inventory,
   setInventory,
   onGoHome,
+  onOpenSettings,
 }) => {
   const [foragingLocation, setForagingLocation] = useState<string | null>(null);
   const [forageMessage, setForageMessage] = useState<string | null>(null);
@@ -95,7 +97,7 @@ export const ExplorationView: React.FC<ExplorationViewProps> = ({
     <div className="flex flex-col w-full pb-6 gap-3.5 animate-in fade-in">
       {/* Toast message */}
       {forageMessage && (
-        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-[#30312b] text-[#f2f1e8] px-4 py-2 rounded-full shadow-lg text-xs font-medium flex items-center gap-1.5 animate-bounce">
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-[#30312b] text-[#f2f1e8] px-4 py-2 rounded-full shadow-lg text-xs font-medium flex items-center gap-1.5 animate-bounce">
           <span className="material-symbols-outlined text-[16px] text-[#fec97b]">check_circle</span>
           <span>{forageMessage}</span>
         </div>
@@ -110,9 +112,22 @@ export const ExplorationView: React.FC<ExplorationViewProps> = ({
               숲과 마을 지도
             </h2>
           </div>
-          <span className="text-[11px] font-semibold text-[#4c6150] bg-[#d1e9d3] px-2 py-0.5 rounded-full">
-            탐험 및 산책
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[11px] font-semibold text-[#4c6150] bg-[#d1e9d3] px-2 py-0.5 rounded-full">
+              탐험 및 산책
+            </span>
+            {onOpenSettings && (
+              <button
+                onClick={onOpenSettings}
+                aria-label="설정"
+                title="설정 및 프로필"
+                className="w-7 h-7 rounded-full bg-[#ffffff] border border-[#e5dec9] flex items-center justify-center text-[#434843] shadow-xs hover:bg-[#fbfaf1] active:scale-95 transition-transform"
+                type="button"
+              >
+                <span className="material-symbols-outlined text-[16px]">settings</span>
+              </button>
+            )}
+          </div>
         </div>
         <p className="text-[12px] text-[#434843] mt-1">
           구름꼬리와 함께 거닐 수 있는 솔바람 숲의 비밀스러운 장소들입니다.

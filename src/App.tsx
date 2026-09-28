@@ -124,55 +124,8 @@ export default function App() {
 
   return (
     <div className="bg-[#fbfaf1] text-[#1b1c17] min-h-screen flex flex-col font-['Nunito_Sans',sans-serif]">
-      {/* Fixed Top Header */}
-      <header className="fixed top-0 w-full z-40 bg-[#fbfaf1]/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(57,58,52,0.04)] border-b border-[#e5dec9]/40">
-        <div className="h-14 px-5 flex items-center justify-between max-w-[430px] mx-auto">
-          {/* Header Title */}
-          <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[#7e5713] text-[20px] select-none">
-              {timeOfDay === 'night' ? 'bedtime' : 'dark_mode'}
-            </span>
-            <span className="font-['Literata',serif] font-semibold text-[18px] text-[#1b1c17] tracking-tight truncate max-w-[200px]">
-              {activeTab === 'home'
-                ? 'Home'
-                : activeTab === 'map'
-                ? '지도'
-                : activeTab === 'pets'
-                ? '펫'
-                : '도감'}
-            </span>
-          </div>
-
-          {/* Header Right Actions */}
-          <div className="flex items-center gap-1.5">
-            <button
-              id="header-settings-btn"
-              onClick={() => {
-                sfx.playChime(500, 0.2);
-                setIsSettingsOpen(true);
-              }}
-              aria-label="설정"
-              className="w-10 h-10 flex items-center justify-center rounded-full text-[#434843] hover:text-[#1b1c17] hover:bg-[#efeee5]/50 transition-colors"
-            >
-              <span className="material-symbols-outlined text-[22px]">settings</span>
-            </button>
-            <button
-              id="header-profile-btn"
-              onClick={() => {
-                sfx.playChime(560, 0.2);
-                setIsSettingsOpen(true);
-              }}
-              aria-label="내 프로필"
-              className="w-8 h-8 rounded-full bg-[#4c6150] flex items-center justify-center shadow-[0_2px_6px_rgba(57,58,52,0.08)] active:scale-95 transition-transform"
-            >
-              <span className="material-symbols-outlined text-[#ffffff] text-[18px]">person</span>
-            </button>
-          </div>
-        </div>
-      </header>
-
-      {/* Main Content Area */}
-      <main className="flex-1 w-full max-w-[430px] mx-auto px-4 sm:px-5 pt-16 pb-24 flex flex-col relative min-h-screen">
+      {/* Main Content Area - Seamless & Unpinned without rigid top header */}
+      <main className="flex-1 w-full max-w-[430px] mx-auto px-4 sm:px-5 pt-4 sm:pt-6 pb-24 flex flex-col relative min-h-screen">
         {activeTab === 'home' && (
           <CottageView
             pet={pet}
@@ -185,6 +138,10 @@ export default function App() {
             onOpenTune={() => setIsTuneOpen(true)}
             onOpenQuest={() => setIsQuestOpen(true)}
             onOpenExpedition={() => setIsExpeditionOpen(true)}
+            onOpenSettings={() => {
+              sfx.playChime(500, 0.2);
+              setIsSettingsOpen(true);
+            }}
           />
         )}
 
@@ -193,14 +150,32 @@ export default function App() {
             inventory={inventory}
             setInventory={setInventory}
             onGoHome={() => setActiveTab('home')}
+            onOpenSettings={() => {
+              sfx.playChime(500, 0.2);
+              setIsSettingsOpen(true);
+            }}
           />
         )}
 
         {activeTab === 'pets' && (
-          <PetSanctuaryView pet={pet} setPet={setPet} />
+          <PetSanctuaryView
+            pet={pet}
+            setPet={setPet}
+            onOpenSettings={() => {
+              sfx.playChime(500, 0.2);
+              setIsSettingsOpen(true);
+            }}
+          />
         )}
 
-        {activeTab === 'tome' && <TomeView />}
+        {activeTab === 'tome' && (
+          <TomeView
+            onOpenSettings={() => {
+              sfx.playChime(500, 0.2);
+              setIsSettingsOpen(true);
+            }}
+          />
+        )}
       </main>
 
       {/* Fixed Bottom Navigation Dock */}

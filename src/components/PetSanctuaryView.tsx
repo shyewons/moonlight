@@ -5,9 +5,10 @@ import { sfx } from '../utils/audio';
 interface PetSanctuaryViewProps {
   pet: PetStatus;
   setPet: React.Dispatch<React.SetStateAction<PetStatus>>;
+  onOpenSettings?: () => void;
 }
 
-export const PetSanctuaryView: React.FC<PetSanctuaryViewProps> = ({ pet, setPet }) => {
+export const PetSanctuaryView: React.FC<PetSanctuaryViewProps> = ({ pet, setPet, onOpenSettings }) => {
   const [accessory, setAccessory] = useState<'none' | 'bell' | 'flower'>('flower');
   const [careMessage, setCareMessage] = useState<string | null>(null);
 
@@ -39,7 +40,7 @@ export const PetSanctuaryView: React.FC<PetSanctuaryViewProps> = ({ pet, setPet 
   return (
     <div className="flex flex-col w-full pb-6 gap-3.5 animate-in fade-in">
       {careMessage && (
-        <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-[#30312b] text-[#f2f1e8] px-4 py-2 rounded-full shadow-lg text-xs font-medium flex items-center gap-1.5 animate-bounce">
+        <div className="fixed top-5 left-1/2 -translate-x-1/2 z-50 bg-[#30312b] text-[#f2f1e8] px-4 py-2 rounded-full shadow-lg text-xs font-medium flex items-center gap-1.5 animate-bounce">
           <span className="material-symbols-outlined text-[16px] text-[#fec97b]">favorite</span>
           <span>{careMessage}</span>
         </div>
@@ -54,9 +55,22 @@ export const PetSanctuaryView: React.FC<PetSanctuaryViewProps> = ({ pet, setPet 
               반려 솜용 돌보기
             </h2>
           </div>
-          <span className="text-[11px] font-semibold text-[#7e5713] bg-[#ffddb1] px-2 py-0.5 rounded-full">
-            Lv. 1 어린 솜용
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[11px] font-semibold text-[#7e5713] bg-[#ffddb1] px-2 py-0.5 rounded-full">
+              Lv. 1 어린 솜용
+            </span>
+            {onOpenSettings && (
+              <button
+                onClick={onOpenSettings}
+                aria-label="설정"
+                title="설정 및 프로필"
+                className="w-7 h-7 rounded-full bg-[#ffffff] border border-[#e5dec9] flex items-center justify-center text-[#434843] shadow-xs hover:bg-[#fbfaf1] active:scale-95 transition-transform"
+                type="button"
+              >
+                <span className="material-symbols-outlined text-[16px]">settings</span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

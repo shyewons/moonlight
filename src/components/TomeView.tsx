@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { tomeEntries } from '../data/sanctuaryData';
 import { sfx } from '../utils/audio';
 
-export const TomeView: React.FC = () => {
+interface TomeViewProps {
+  onOpenSettings?: () => void;
+}
+
+export const TomeView: React.FC<TomeViewProps> = ({ onOpenSettings }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('전체');
 
   const categories = ['전체', '신비한 생명체', '숲의 탐험가', '신비한 식물'];
@@ -23,9 +27,22 @@ export const TomeView: React.FC = () => {
               오두막 동화 도감
             </h2>
           </div>
-          <span className="text-[11px] font-semibold text-[#4c6150] bg-[#d1e9d3] px-2 py-0.5 rounded-full">
-            발견한 기록 3종
-          </span>
+          <div className="flex items-center gap-1.5">
+            <span className="text-[11px] font-semibold text-[#4c6150] bg-[#d1e9d3] px-2 py-0.5 rounded-full">
+              발견한 기록 3종
+            </span>
+            {onOpenSettings && (
+              <button
+                onClick={onOpenSettings}
+                aria-label="설정"
+                title="설정 및 프로필"
+                className="w-7 h-7 rounded-full bg-[#ffffff] border border-[#e5dec9] flex items-center justify-center text-[#434843] shadow-xs hover:bg-[#fbfaf1] active:scale-95 transition-transform"
+                type="button"
+              >
+                <span className="material-symbols-outlined text-[16px]">settings</span>
+              </button>
+            )}
+          </div>
         </div>
         <p className="text-[12px] text-[#434843] mt-1">
           달의 오두막을 둘러싼 신비한 숲의 생명체들과 식물들의 기록입니다.
